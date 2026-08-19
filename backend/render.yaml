@@ -1,0 +1,5 @@
+# Render / Node deployment
+[web]
+  # Root-level deployment for the backend
+  # Build: npm install
+  # Start: npm start
