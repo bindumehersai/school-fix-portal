@@ -64,12 +64,13 @@ const login = asyncHandler(async (req, res) => {
   const {
     email,
     password,
+    role,
   } = req.body;
 
   // Validate input
-  if (!email || !password) {
+  if (!email || !password || !role) {
     res.status(400);
-    throw new Error('Email and password are required');
+    throw new Error('Email, password and role are required');
   }
 
   // Clean email
@@ -92,6 +93,12 @@ const login = asyncHandler(async (req, res) => {
   if (!passwordMatch) {
     res.status(401);
     throw new Error('Invalid email or password');
+  }
+
+  // Check selected role
+  if (user.role !== role) {
+    res.status(401);
+    throw new Error('Invalid role for this account');
   }
 
   // Login successful
